@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuantumToken (QTM) – Post‑Quantum Secure Asset on Polygon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="QuantumToken (QTM) is a fixed‑supply, post‑quantum secure ERC‑20 asset on Polygon, designed as a scarce high‑value store of value with military‑grade security." />
+
+  <style>
+    :root {
+      --bg: #060606;
+      --gold: #d6a44a;
+      --gold-soft: #f0d38a;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --accent: #ffcc66;
+      --danger: #ff5c5c;
+      --max-width: 1100px;
+      --radius: 14px;
+      --shadow-soft: 0 24px 60px rgba(0,0,0,0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1c1306 0%, #050505 45%, #000000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border-radius: 32px;
+      padding: 28px 24px 32px;
+      border: 1px solid rgba(214,164,74,0.45);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(22px);
+    }
+
+    header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    header img {
+      width: 88px;
+      height: 88px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(214,164,74,0.9);
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.7);
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      background: rgba(0,0,0,0.65);
+      border-radius: 999px;
+      padding: 4px 12px;
+      border: 1px solid rgba(214,164,74,0.6);
+      margin-bottom: 8px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #35e2a0;
+      box-shadow: 0 0 10px #35e2a0;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    h1 span {
+      color: var(--gold);
+    }
+
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    .cta-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f1c164, #d6a44a);
+      color: #111;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.75);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(214,164,74,0.7);
+      color: var(--gold-soft);
+    }
+
+    .btn-outline:hover {
+      background: rgba(214,164,74,0.08);
+      transform: translateY(-1px);
+    }
+
+    main {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 22px;
+    }
+
+    section {
+      background: radial-gradient(circle at top left, rgba(214,164,74,0.16), rgba(0,0,0,0.85) 60%);
+      border-radius: var(--radius);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(214,164,74,0.25);
+    }
+
+    section h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--gold-soft);
+    }
+
+    section p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(214,164,74,0.45);
+      color: var(--gold-soft);
+      background: rgba(0,0,0,0.75);
+    }
+
+    ul {
+      margin-top: 6px;
+      padding-left: 16px;
+    }
+
+    li {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .two-column-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px 22px;
+      margin-top: 10px;
+    }
+
+    .tokenomics-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      background: rgba(0,0,0,0.7);
+      border-radius: 12px;
+      padding: 10px 10px;
+      border: 1px solid rgba(214,164,74,0.25);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .metric-value {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold-soft);
+    }
+
+    .metric-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .steps {
+      margin-top: 8px;
+    }
+
+    .steps li::marker {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #777;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    .warning {
+      color: var(--danger);
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 800px) {
+      .shell {
+        border-radius: 20px;
+        padding: 18px 14px 24px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header img {
+        width: 72px;
+        height: 72px;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .tokenomics-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <img src="Logoquantum.jpg" alt="QuantumToken logo" />
+
+      <div class="hero-text">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          <span>Post‑Quantum Secure Digital Asset</span>
+        </div>
+        <h1><span>Quantum</span>Token (QTM)</h1>
+        <p class="sub">
+          A fixed‑supply ERC‑20 token on Polygon designed around military‑grade and post‑quantum security.
+          QuantumToken aims to become a scarce, high‑value digital asset for investors who care about security,
+          transparency and on‑chain mechanics.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://polygonscan.com/token/0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4" target="_blank" rel="noopener">
+            View QTM on PolygonScan
+          </a>
+          <a class="btn btn-outline" href="#how-to-buy">
+            How to buy QTM
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <div>
+        <section>
+          <h2>Vision</h2>
+          <p>
+            QuantumToken (QTM) was created to explore the frontier of high‑security digital assets.
+            With a hard‑capped supply of 1&nbsp;billion QTM, advanced access control and combined ECDSA plus Lamport
+            signatures, QTM is engineered to survive both today’s threats and the coming post‑quantum era.
+            The long‑term ambition is to position QTM as a scarce, premium‑priced store of value on Polygon.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">1B Fixed Supply</span>
+            <span class="pill">10% Founder Reserve</span>
+            <span class="pill">90% Public Liquidity</span>
+            <span class="pill">Dynamic Floor Price</span>
+            <span class="pill">Post‑Quantum Design</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Security Architecture</h2>
+          <p>
+            QTM is built using OpenZeppelin Contracts v5 on Polygon, with several layers of protection designed for
+            institutional‑grade security:
+          </p>
+          <ul class="steps">
+            ><strong>Role‑based access control</strong> (AccessControl) for granular admin, minting and emergency roles.</li>
+            ><strong>Pausable</strong> transfers and mints so that critical operations can be frozen in emergencies.</li>
+            ><strong>ReentrancyGuard</strong> to protect purchase and withdrawal flows from reentrancy attacks.</li>
+            ><strong>ECDSA + Lamport signatures</strong> on quantum‑related operations, combining classical and post‑quantum resistance.</li>
+            ><strong>Chainlink price feeds</strong> to anchor the token’s minimum price in USD with reliable oracle data.</li>
+            ><strong>On‑chain security metrics</strong> tracking complexity, verification levels and audit checkpoints.</li>
+          </ul>
+        </section>
+
+        <section id="how-to-buy">
+          <h2>How QTM public sale works</h2>
+          <p>
+            At deployment, 100&nbsp;million QTM were minted to the founder reserve wallet and 900&nbsp;million QTM
+            were minted to the token contract itself. The contract sells QTM directly using MATIC/POL through a
+            dynamic pricing curve based on Chainlink MATIC/USD data.
+          </p>
+
+          <ol class="steps">
+            >Connect a wallet to the Polygon network with MATIC/POL balance.</li>
+            >Use the official PolygonScan page (Write Contract &rarr; de>buyTokens</code>) or any dApp that integrates QTM to buy from the contract.</li>
+            >The contract checks the latest Chainlink price and enforces a rising minimum USD price per token with every purchase.</li>
+            >Purchased QTM are transferred from the contract’s 900&nbsp;M pool to the buyer’s wallet.</li>
+          </ol>
+
+          <p class="warning">
+            QTM is a high‑risk digital asset. Nothing on this website is financial advice. Always do your own research
+            and never invest more than you can afford to lose.
+          </p>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <section>
+          <h2>Tokenomics</h2>
+          <div class="tokenomics-row">
+            <div class="metric">
+              <div class="metric-label">Max Supply</div>
+              <div class="metric-value">1,000,000,000 QTM</div>
+              <div class="metric-note">Hard‑capped, no further minting beyond initial allocation.</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Founder Reserve</div>
+              <div class="metric-value">100,000,000 QTM</div>
+              <div class="metric-note">10% minted to the founder wallet for long‑term alignment.</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Public Liquidity</div>
+              <div class="metric-value">900,000,000 QTM</div>
+              <div class="metric-note">90% held by the contract and sold transparently on‑chain.</div>
+            </div>
+          </div>
+
+          <div class="two-column-list">
+            <div>
+              <ul>
+                ><strong>Chain:</strong> Polygon PoS (mainnet).</li>
+                ><strong>Standard:</strong> ERC‑20, burnable, pausable.</li>
+                ><strong>Decimals:</strong> 18.</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                ><strong>Contract:</strong><br />
+                  <a href="https://polygonscan.com/address/0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4" target="_blank" rel="noopener">
+                    0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4
+                  </a>
+                </li>
+                ><strong>Oracle:</strong> Chainlink MATIC/USD feed.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Contact & Links</h2>
+          <p>
+            For partnerships, institutional interest or technical questions, reach out to the QuantumToken team:
+          </p>
+          <ul>
+            ><strong>Email:</strong> <a href="mailto:quantumtokenproject@gmail.com">quantumtokenproject@gmail.com</a></li>
+            ><strong>Contract on PolygonScan:</strong><br />
+              <a href="https://polygonscan.com/address/0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4#code" target="_blank" rel="noopener">
+                Verified source code &amp; ABI
+              </a>
+            </li>
+          </ul>
+          <p style="margin-top:10px;">
+            Social channels (coming soon): Twitter / X, Telegram, Discord.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        QuantumToken (QTM) is an experimental digital asset on Polygon. Nothing here is an offer, solicitation
+        or guarantee of future value. Always do your own research.
+      </p>
+      <p style="margin-top:4px;">
+        &copy; <span id="year"></span> QuantumToken. All rights reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
