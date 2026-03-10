@@ -79,6 +79,54 @@
       text-decoration-style: dotted;
     }
 
+    /* NOVO: barra de botões de compra em destaque */
+    .buy-dex-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1f6feb, #0a3d91);
+      box-shadow: 0 10px 26px rgba(5, 20, 58, 0.35);
+      color: #ffffff;
+      font-size: 13px;
+    }
+
+    .buy-dex-label {
+      font-weight: 500;
+      opacity: 0.95;
+    }
+
+    .buy-dex-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .buy-dex-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(10, 23, 55, 0.15);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(3px);
+    }
+
+    .buy-dex-button-primary {
+      background: #f5b400;
+      border-color: #f5b400;
+      color: #0b1530;
+    }
+
     header {
       display: flex;
       align-items: center;
@@ -243,7 +291,7 @@
       margin-bottom: 14px;
     }
 
-    /* NOVO: links para DEX (lugares de compra) */
+    /* NOVO: links para DEX (lugares de compra) dentro do hero (mantido igual) */
     .dex-links {
       font-size: 12px;
       color: var(--color-text-soft);
@@ -567,6 +615,10 @@
       .top-links {
         justify-content: center;
       }
+
+      .buy-dex-bar {
+        border-radius: 14px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -602,6 +654,37 @@
     <div class="top-links">
       <a href="http://t.me/+KYWbf9mC5u8yOGZk" target="_blank" rel="noopener noreferrer">Telegram</a>
       <a href="https://x.com/Henriqu85075853" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+    </div>
+
+    <!-- NOVO: botões de compra em destaque no topo -->
+    <div class="buy-dex-bar">
+      <span class="buy-dex-label">Buy / trade QTM on:</span>
+      <div class="buy-dex-buttons">
+        <a
+          href="https://app.uniswap.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-dex-button buy-dex-button-primary"
+        >
+          Uniswap
+        </a>
+        <a
+          href="https://apeswap.finance/swap"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-dex-button"
+        >
+          ApeSwap
+        </a>
+        <a
+          href="https://www.sushi.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-dex-button"
+        >
+          Sushi
+        </a>
+      </div>
     </div>
 
     <header>
@@ -673,7 +756,7 @@
           </a>
         </div>
 
-        <!-- NOVO: locais onde as pessoas podem comprar QTM em DEX -->
+        <!-- MANTIDO: locais onde as pessoas podem comprar QTM em DEX -->
         <div class="dex-links">
           Also trade QTM on:
           <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">Uniswap (recommended)</a>
