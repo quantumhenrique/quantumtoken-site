@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>QuantumToken (QTM) – Bank‑grade, Post‑Quantum Inspired Crypto Asset</title>
+  <title>QuantumToken (QTM) Bank‑grade, Post‑Quantum Inspired Crypto Asset</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="QuantumToken (QTM) is a scarce ERC‑20 asset on Polygon, inspired by military‑grade and post‑quantum security, with an on‑chain rising price curve."
+    content="QuantumToken (QTM) is a scarce ERC‑20 asset on Polygon, inspired by military grade and post‑quantum security, with an on‑chain rising price curve."
   />
   <style>
     :root {
@@ -77,29 +77,14 @@
       gap: 12px;
     }
 
-    .brand-mark {
-      width: 40px;
-      height: 40px;
+    /* NOVO: usa o Logoquantum.png */
+    .brand-logo {
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
-      background: conic-gradient(
-        from 210deg,
-        #0a3d91,
-        #1f6feb,
-        #1fa37b,
-        #f5b400,
-        #0a3d91
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(5, 20, 58, 0.35);
-    }
-
-    .brand-mark span {
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 0.04em;
+      box-shadow: 0 10px 26px rgba(5, 20, 58, 0.35);
+      background: #ffffff;
+      object-fit: contain;
     }
 
     .brand-text {
@@ -508,6 +493,22 @@
       text-decoration-style: dotted;
     }
 
+    /* NOVO: etiqueta fixa no canto inferior direito */
+    .location-tag {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(10, 61, 145, 0.92);
+      color: #ffffff;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 22px rgba(5, 20, 58, 0.5);
+      z-index: 999;
+    }
+
     @media (max-width: 880px) {
       header {
         flex-direction: column;
@@ -529,10 +530,6 @@
         text-align: left;
         margin-top: 10px;
       }
-
-      main {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 600px) {
@@ -552,6 +549,13 @@
       .hero h1 {
         font-size: 26px;
       }
+
+      .location-tag {
+        right: 10px;
+        bottom: 10px;
+        font-size: 10px;
+        padding: 5px 10px;
+      }
     }
   </style>
 </head>
@@ -559,7 +563,8 @@
   <div class="page">
     <header>
       <div class="brand">
-        <div class="brand-mark"><span>Q</span></div>
+        <!-- AQUI usa o arquivo Logoquantum.png na raiz do repositório -->
+        <img src="Logoquantum.png" alt="QuantumToken logo" class="brand-logo" />
         <div class="brand-text">
           <strong>QUANTUMTOKEN</strong>
           <small>Bank‑grade, post‑quantum inspired digital asset</small>
@@ -595,7 +600,7 @@
         <p class="hero-subtitle">
           QuantumToken (QTM) is a scarce ERC‑20 on Polygon designed to feel like
           a digital “bond” with security inspired by military‑grade (AES‑256‑style)
-          and post‑quantum Lamport signatures – not a casino chip.
+          and post‑quantum Lamport signatures not a casino chip.
         </p>
 
         <div class="hero-bullets">
@@ -675,7 +680,7 @@
     <main>
       <section id="why" class="card">
         <div class="section-title">Why QuantumToken exists</div>
-        <h2>A scarce, security‑obsessed asset – not another meme</h2>
+        <h2>A scarce, security‑obsessed asset not another meme</h2>
         <p>
           Most tokens either chase hype and ignore security, or over‑engineer features
           and forget about scarcity. QuantumToken (QTM) was built to do the opposite:
@@ -686,23 +691,23 @@
           At launch, a minority of the supply is reserved to the founding wallet for
           long‑term alignment, while the majority sits inside the contract itself to
           be released only through transparent, on‑chain purchases. No stealth mints,
-          no hidden unlock schedules – every movement can be followed on PolygonScan.
+          no hidden unlock schedules every movement can be followed on PolygonScan.
         </p>
         <div class="badge-row">
           <span class="badge badge-green">Hard‑capped, predictable supply</span>
-          <span class="badge badge-gold">Designed for multi‑year conviction</span>
+          <span class="badge badge-gold">Designed for multi year conviction</span>
           <span class="badge">Built on Polygon PoS</span>
         </div>
         <p>
           The ambition is simple: to let holders feel about their QTM position the way
-          they feel about a solid long‑term banking relationship – calm, transparent,
+          they feel about a solid long‑term banking relationship calm, transparent,
           and protected by layered security, even while fully acknowledging crypto risk.
         </p>
       </section>
 
       <section id="security" class="card">
         <div class="section-title">Security stack</div>
-        <h2>Bank‑inspired controls and post‑quantum‑style checks</h2>
+        <h2>Bank‑inspired controls and post‑quantum style checks</h2>
         <p>
           Security is not a slogan here; it is the core design principle. The contract
           is built on modern OpenZeppelin primitives and extends them with extra
@@ -713,7 +718,7 @@
             <div class="two-col-item-title">Role‑based access control</div>
             <p>
               Admin, minting, audit, and emergency powers are separated into distinct
-              roles, reducing single‑point‑of‑failure risk and mirroring institutional
+              roles, reducing single point of failure risk and mirroring institutional
               segregation of duties.
             </p>
           </div>
@@ -743,7 +748,7 @@
         <p>
           On‑chain security metrics continuously track complexity, verification levels,
           and audit checkpoints. Accounts that behave more securely over time can
-          achieve enhanced verification tiers – a structure inspired by how private
+          achieve enhanced verification tiers a structure inspired by how private
           banking treats long‑standing, trusted relationships.
         </p>
       </section>
@@ -832,6 +837,11 @@
         <a href="#why">Back to top</a>
       </div>
     </footer>
+  </div>
+
+  <!-- NOVO: texto no canto inferior direito -->
+  <div class="location-tag">
+    Canary Wharf, London
   </div>
 
   <script>
