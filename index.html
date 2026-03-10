@@ -64,6 +64,21 @@
       padding: 32px 20px 64px;
     }
 
+    /* NOVO: barra de links no topo */
+    .top-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--color-text-soft);
+    }
+
+    .top-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
     header {
       display: flex;
       align-items: center;
@@ -266,6 +281,7 @@
       font-size: 11px;
       color: var(--color-text-muted);
       max-width: 460px;
+      margin-bottom: 0;
     }
 
     .hero-note strong {
@@ -530,6 +546,10 @@
         text-align: left;
         margin-top: 10px;
       }
+
+      .top-links {
+        justify-content: center;
+      }
     }
 
     @media (max-width: 600px) {
@@ -561,6 +581,12 @@
 </head>
 <body>
   <div class="page">
+    <!-- NOVO: links diretos para Telegram e X -->
+    <div class="top-links">
+      <a href="http://t.me/+KYWbf9mC5u8yOGZk" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://x.com/Henriqu85075853" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+    </div>
+
     <header>
       <div class="brand">
         <!-- AQUI usa o arquivo Logoquantum.png na raiz do repositório -->
@@ -777,7 +803,7 @@
         </li>
         <li>
           When you buy, QTM moves directly from the contract’s pool to your wallet
-          no middleman, no custody risk, everything visible on‑chain.
+          no middleman, no custody risk, everything visible on chain.
         </li>
       </ol>
       <p>
