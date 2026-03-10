@@ -243,6 +243,23 @@
       margin-bottom: 14px;
     }
 
+    /* NOVO: links para DEX (lugares de compra) */
+    .dex-links {
+      font-size: 12px;
+      color: var(--color-text-soft);
+      margin-bottom: 10px;
+    }
+
+    .dex-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      margin-left: 6px;
+    }
+
+    .dex-links a:first-of-type {
+      margin-left: 0;
+    }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -654,6 +671,16 @@
           >
             Inspect verified contract
           </a>
+        </div>
+
+        <!-- NOVO: locais onde as pessoas podem comprar QTM em DEX -->
+        <div class="dex-links">
+          Also trade QTM on:
+          <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">Uniswap (recommended)</a>
+          ·
+          <a href="https://apeswap.finance/swap" target="_blank" rel="noopener noreferrer">ApeSwap</a>
+          ·
+          <a href="https://www.sushi.com/" target="_blank" rel="noopener noreferrer">Sushi</a>
         </div>
 
         <p class="hero-note">
