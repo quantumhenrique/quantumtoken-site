@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuantumToken (QTM) · Bank‑grade MoonPay On‑Ramp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Institutional‑style purchase experience for QuantumToken (QTM): buy MATIC on Polygon via MoonPay and swap into QTM on leading DEXs."
+  />
+  <style>
+    :root {
+      --color-bg: #f4f7fb;
+      --color-surface: #ffffff;
+      --color-surface-soft: #f9fbff;
+      --color-border-soft: #dbe3f0;
+
+      --color-primary: #0a3d91;      /* deep bank blue */
+      --color-primary-light: #1f6feb;/* cobalt blue accent */
+      --color-primary-soft: #e3edff;
+
+      --color-accent: #f5b400;       /* saffron / gold */
+      --color-success: #1fa37b;      /* green for growth */
+      --color-danger: #c53030;
+
+      --color-text-main: #0b1530;
+      --color-text-soft: #5d6785;
+      --color-text-muted: #8e98b3;
+
+      --shadow-soft: 0 18px 45px rgba(5, 20, 58, 0.16);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top left, #e5f0ff 0, #f4f7fb 55%, #eef3ff 100%);
+      color: var(--color-text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .top-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--color-text-soft);
+      margin-bottom: 12px;
+    }
+
+    .top-links-left,
+    .top-links-right {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .top-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .crumb {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(5, 20, 58, 0.35);
+      background: #ffffff;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-text strong {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand-text small {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--color-text-soft);
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, #1f6feb, #f5b400);
+      transition: width 0.18s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #1f6feb, #0a3d91);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(10, 61, 145, 0.4);
+    }
+
+    .nav-cta span {
+      margin-left: 6px;
+      font-size: 16px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 32px;
+    }
+
+    .hero-copy {
+      padding: 26px 24px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #e3edff 0, #ffffff 55%);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(208, 219, 245, 0.9);
+      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--color-text-soft);
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #6ee7b7, #1fa37b);
+      box-shadow: 0 0 0 6px rgba(31, 163, 123, 0.15);
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      line-height: 1.16;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: var(--color-primary-light);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--color-text-soft);
+      max-width: 520px;
+      margin-bottom: 16px;
+    }
+
+    .hero-bullets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-bullets span {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border-soft);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--color-text-soft);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #1f6feb, #0a3d91);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(10, 61, 145, 0.45);
+    }
+
+    .btn-primary span {
+      margin-left: 8px;
+      font-size: 18px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border-soft);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--color-text-main);
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .dex-mini {
+      font-size: 11px;
+      color: var(--color-text-soft);
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .dex-mini a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      margin-left: 4px;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      max-width: 460px;
+    }
+
+    .hero-note strong {
+      color: var(--color-danger);
+      font-weight: 600;
+    }
+
+    .hero-tagline {
+      position: absolute;
+      right: 22px;
+      top: 22px;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      text-align: right;
+    }
+
+    .hero-tagline span {
+      display: block;
+      color: var(--color-primary);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(155deg, #0a3d91, #1f6feb 55%, #1fa37b);
+      padding: 20px 18px 18px;
+      color: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-header h2 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .panel-badge {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 11px;
+    }
+
+    .panel-form {
+      border-radius: var(--radius-md);
+      background: rgba(10, 17, 38, 0.32);
+      padding: 12px 12px 10px;
+      font-size: 12px;
+    }
+
+    .panel-form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .panel-label {
+      font-size: 11px;
+      color: rgba(220, 234, 255, 0.9);
+    }
+
+    .panel-input-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .panel-input-group input,
+    .panel-input-group select {
+      flex: 1;
+      padding: 7px 9px;
+      border-radius: 9px;
+      border: none;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .panel-input-group span {
+      font-size: 11px;
+      color: rgba(220, 234, 255, 0.9);
+      white-space: nowrap;
+    }
+
+    .panel-input-note {
+      font-size: 10px;
+      color: rgba(220, 234, 255, 0.8);
+    }
+
+    .panel-footer {
+      font-size: 10px;
+      color: rgba(220, 234, 255, 0.9);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      padding: 18px 18px 16px;
+      box-shadow: 0 12px 30px rgba(5, 20, 58, 0.12);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--color-text-soft);
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .card ol {
+      padding-left: 18px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--color-text-soft);
+    }
+
+    .card li + li {
+      margin-top: 4px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border-soft);
+      color: var(--color-text-muted);
+    }
+
+    .badge.badge-green {
+      border-color: rgba(31, 163, 123, 0.35);
+      color: var(--color-success);
+    }
+
+    .badge.badge-gold {
+      border-color: rgba(245, 180, 0, 0.4);
+      color: #c48800;
+    }
+
+    .dex-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .dex-card {
+      font-size: 12px;
+      border-radius: 10px;
+      padding: 9px 10px;
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dex-name {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--color-text-main);
+    }
+
+    .dex-tag {
+      font-size: 10px;
+      color: var(--color-text-muted);
+    }
+
+    .disclaimer {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .disclaimer strong {
+      color: var(--color-danger);
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      border-top: 1px solid rgba(205, 215, 235, 0.7);
+      padding-top: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .location-tag {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(10, 61, 145, 0.92);
+      color: #ffffff;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 22px rgba(5, 20, 58, 0.5);
+      z-index: 999;
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tagline {
+        position: static;
+        text-align: left;
+        margin-top: 8px;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .dex-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 20px 14px 40px;
+      }
+
+      .hero-copy {
+        padding: 20px 16px 18px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .dex-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .location-tag {
+        right: 10px;
+        bottom: 10px;
+        font-size: 10px;
+        padding: 5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-links">
+      <div class="top-links-left">
+        <span class="crumb">
+          QuantumToken &nbsp;›&nbsp; Buy with card (MoonPay)
+        </span>
+      </div>
+      <div class="top-links-right">
+        <a href="index.html">← Back to main site</a>
+        <a href="http://t.me/+KYWbf9mC5u8yOGZk" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="https://x.com/Henriqu85075853" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+      </div>
+    </div>
+
+    <header>
+      <div class="brand">
+        <img src="Logoquantum.png" alt="QuantumToken logo" class="brand-logo" />
+        <div class="brand-text">
+          <strong>QUANTUMTOKEN</strong>
+          <small>Bank‑grade, post‑quantum inspired digital asset</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#how">Flow</a>
+        <a href="#dex">DEX access</a>
+        <a href="#risk">Risk</a>
+        <a
+          class="nav-cta"
+          href="https://polygonscan.com/address/0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contract on Polygon
+          <span>↗</span>
+        </a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          <span>Card on‑ramp · Polygon · MoonPay infrastructure</span>
+        </div>
+        <h1>
+          A bank‑style
+          <span>QuantumToken on‑ramp</span><br />
+          built on MoonPay and Polygon.
+        </h1>
+        <p class="hero-subtitle">
+          Use a familiar, institution‑grade MoonPay checkout to buy MATIC on Polygon with
+          card or local payment methods, then swap into QTM on leading DEX venues.
+        </p>
+
+        <div class="hero-bullets">
+          <span>MoonPay checkout with cards and local rails*</span>
+          <span>MATIC delivered directly to your Polygon wallet</span>
+          <span>Then trade into QTM on Uniswap / ApeSwap / Sushi</span>
+        </div>
+
+        <div class="hero-ctas">
+          <button class="btn-primary" type="button" onclick="openMoonPayCheckout()">
+            Start MoonPay purchase
+            <span>●</span>
+          </button>
+          <a class="btn-secondary" href="#dex">
+            Or go directly to DEX access
+          </a>
+        </div>
+
+        <p class="dex-mini">
+          Already funded with MATIC on Polygon?
+          <a href="#dex">Jump straight to DEX links for QTM ↗</a>
+        </p>
+
+        <p class="hero-note">
+          <strong>Important:</strong> MoonPay is a third‑party regulated payment provider.
+          You will complete KYC and payment directly with them; QuantumToken never
+          touches your fiat or card details.
+        </p>
+
+        <div class="hero-tagline">
+          Designed to feel like<br />
+          a private‑bank on‑ramp,<br />
+          not a casino entrance.
+          <span>CALM • SECURE • STRUCTURED</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-header">
+          <h2>MoonPay checkout preferences</h2>
+          <div class="panel-badge">Preview · Client‑side only</div>
+        </div>
+
+        <div class="panel-form">
+          <div class="panel-form-row">
+            <div class="panel-label">Approximate purchase amount</div>
+            <div class="panel-input-group">
+              <input
+                id="fiatAmount"
+                type="number"
+                min="20"
+                step="10"
+                placeholder="50"
+              />
+              <select id="fiatCurrency">
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="gbp">GBP</option>
+              </select>
+              <span>Fiat</span>
+            </div>
+            <div class="panel-input-note">
+              MoonPay enforces its own minimum/maximum amounts and fees depending on
+              your country and payment method.
+            </div>
+          </div>
+
+          <div class="panel-form-row">
+            <div class="panel-label">Polygon wallet address (optional, for your notes)</div>
+            <div class="panel-input-group">
+              <input
+                id="walletNote"
+                type="text"
+                placeholder="0x... (you will enter it again inside MoonPay)"
+              />
+            </div>
+            <div class="panel-input-note">
+              For a static GitHub Pages integration, we do not pre‑fill the wallet
+              into MoonPay; you will confirm it directly in the MoonPay form.
+            </div>
+          </div>
+
+          <button class="btn-primary" type="button" onclick="openMoonPayCheckout()">
+            Continue to secure MoonPay checkout
+          </button>
+        </div>
+
+        <p class="panel-footer">
+          MoonPay’s on‑ramp products convert fiat (card, bank, Apple Pay, etc.) into
+          supported cryptocurrencies on networks like Polygon, operating in 160+ countries
+          with regulatory KYC and anti‑fraud controls. *
+        </p>
+      </aside>
+    </section>
+
+    <main>
+      <section id="how" class="card">
+        <div class="section-title">Flow overview</div>
+        <h2>From card to QTM in two clear stages</h2>
+        <p>
+          The process is deliberately simple: first you use MoonPay to acquire MATIC
+          directly on the Polygon network using card or local methods; then you use a
+          decentralised exchange to swap that MATIC into QTM.
+        </p>
+        <ol>
+          <li>
+            Click “Start MoonPay purchase” above, choose your fiat currency, and complete
+            the MoonPay KYC and payment steps.
+          </li>
+          <li>
+            Ensure the destination wallet you provide inside MoonPay is a Polygon‑enabled
+            address that you personally control (for example, a MetaMask wallet with the
+            Polygon network configured).
+          </li>
+          <li>
+            Once MATIC arrives, return to this page and select your preferred DEX below
+            (Uniswap, ApeSwap, Sushi) with the QTM pair pre‑configured.
+          </li>
+          <li>
+            Execute a swap from MATIC into QTM directly from your self‑custodied wallet,
+            keeping full control of your keys and assets at every step.
+          </li>
+        </ol>
+        <div class="badge-row">
+          <span class="badge badge-green">No custody by QuantumToken</span>
+          <span class="badge">MoonPay handles fiat and compliance</span>
+          <span class="badge badge-gold">DEXs handle the market pricing</span>
+        </div>
+      </section>
+
+      <section id="dex" class="card">
+        <div class="section-title">Dex access</div>
+        <h2>Swap MATIC into QTM on leading DEXs</h2>
+        <p>
+          After your MoonPay purchase settles and MATIC appears in your Polygon wallet,
+          use one of the decentralised exchanges below to obtain QTM. We recommend always
+          checking contract addresses carefully before confirming any swap.
+        </p>
+
+        <div class="dex-grid">
+          <a
+            class="dex-card"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <!-- TODO: substitua # pelo link direto do par QTM em Uniswap -->
+            <span class="dex-name">Uniswap</span>
+            <span class="dex-tag">Recommended · QTM / MATIC pair</span>
+          </a>
+          <a
+            class="dex-card"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <!-- TODO: substitua # pelo link direto do par QTM em ApeSwap -->
+            <span class="dex-name">ApeSwap</span>
+            <span class="dex-tag">QTM / MATIC on Polygon</span>
+          </a>
+          <a
+            class="dex-card"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <!-- TODO: substitua # pelo link direto do par QTM em Sushi -->
+            <span class="dex-name">Sushi</span>
+            <span class="dex-tag">Alternative routing</span>
+          </a>
+        </div>
+
+        <p class="disclaimer">
+          Always verify that the token contract matches the official QTM address:
+          <code>0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4</code> on Polygon PoS,
+          and start with a small test transaction before scaling any position.
+        </p>
+      </section>
+    </main>
+
+    <section id="risk" class="card">
+      <div class="section-title">Risk notice</div>
+      <h2>High‑risk asset, regulated on‑ramp partner</h2>
+      <p class="disclaimer">
+        QuantumToken (QTM) is an experimental, high‑risk digital asset. Nothing on this
+        page or on the main website is financial advice, a recommendation, or any form of
+        guarantee of future value, liquidity, or performance. You can lose 100% of the
+        capital you allocate.
+      </p>
+      <p class="disclaimer">
+        MoonPay is an independent, regulated payment infrastructure provider. Their KYC,
+        anti‑fraud systems, supported countries, transaction limits, and fees are defined
+        solely by MoonPay and may change over time. You are responsible for reading and
+        accepting MoonPay’s own Terms of Use and disclosures.
+      </p>
+      <p class="disclaimer">
+        References to “bank‑grade” or “institutional‑style” describe a design ambition
+        for clarity, structure, and layered security. QuantumToken is not a bank account,
+        deposit, or regulated security in any jurisdiction.
+      </p>
+    </section>
+
+    <footer>
+      <div>
+        &copy; <span id="year"></span> QuantumToken · Polygon PoS · Contract:
+        0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4
+      </div>
+      <div class="footer-links">
+        <a
+          href="https://polygonscan.com/address/0x38AE2bAE713eD04E2b51f452a3f58e781C9165B4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          PolygonScan
+        </a>
+        <a href="index.html">Back to main site</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="location-tag">
+    Canary Wharf, London
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // === CONFIGURAÇÃO DA SUA INTEGRAÇÃO MOONPAY ===
+    // ATENÇÃO: troque isso pela sua publishable API key do painel MoonPay.
+    const MOONPAY_API_KEY = "SUA_API_KEY_PUBLICA_DA_MOONPAY_AQUI";
+
+    // Base URL oficial da MoonPay para o widget de compra.
+    const MOONPAY_BASE_URL = "https://buy.moonpay.com";
+
+    // CÓDIGO DA MOEDA NA MOONPAY:
+    // Confirme no dashboard se é "matic_polygon", "matic" ou similar.
+    const CURRENCY_CODE = "matic_polygon";
+
+    function openMoonPayCheckout() {
+      const amountInput = document.getElementById("fiatAmount");
+      const fiatCurrencySelect = document.getElementById("fiatCurrency");
+
+      const baseCurrencyAmount = parseFloat(amountInput.value) || 50;
+      const baseCurrencyCode = fiatCurrencySelect.value || "usd";
+
+      const params = new URLSearchParams({
+        apiKey: MOONPAY_API_KEY,
+        currencyCode: CURRENCY_CODE,
+        baseCurrencyCode: baseCurrencyCode,
+        baseCurrencyAmount: baseCurrencyAmount.toString()
+      });
+
+      const url = MOONPAY_BASE_URL + "?" + params.toString();
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  </script>
+</body>
+</html>
