@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="QuantumToken (QTM) is a scarce ERC‑20 asset on Polygon,  military grade and post quantum security, with an on‑chain rising price curve."
+    content="QuantumToken (QTM) is a scarce ERC-20 asset on Polygon,  military grade and post quantum security, with an on-chain rising price curve."
   />
   <style>
     :root {
@@ -15,12 +15,12 @@
       --color-surface-soft: #f9fbff;
       --color-border-soft: #dbe3f0;
 
-      --color-primary: #0a3d91;      /* deep bank blue */
-      --color-primary-light: #1f6feb;/* cobalt blue accent */
+      --color-primary: #0a3d91;
+      --color-primary-light: #1f6feb;
       --color-primary-soft: #e3edff;
 
-      --color-accent: #f5b400;       /* saffron / gold */
-      --color-success: #1fa37b;      /* green for growth */
+      --color-accent: #f5b400;
+      --color-success: #1fa37b;
       --color-danger: #c53030;
 
       --color-text-main: #0b1530;
@@ -40,10 +40,13 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      min-width: 0;
     }
 
     html, body {
       height: 100%;
+      width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -51,6 +54,13 @@
       background: radial-gradient(circle at top left, #e5f0ff 0, #f4f7fb 55%, #eef3ff 100%);
       color: var(--color-text-main);
       -webkit-font-smoothing: antialiased;
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     a {
@@ -59,12 +69,12 @@
     }
 
     .page {
+      width: 100%;
       max-width: 1120px;
       margin: 0 auto;
       padding: 32px 20px 64px;
     }
 
-    /* NOVO: barra de links no topo */
     .top-links {
       display: flex;
       justify-content: flex-end;
@@ -72,6 +82,7 @@
       font-size: 13px;
       margin-bottom: 8px;
       color: var(--color-text-soft);
+      flex-wrap: wrap;
     }
 
     .top-links a {
@@ -79,7 +90,6 @@
       text-decoration-style: dotted;
     }
 
-    /* NOVO: barra de botões de compra em destaque */
     .buy-dex-bar {
       display: flex;
       flex-wrap: wrap;
@@ -98,12 +108,14 @@
     .buy-dex-label {
       font-weight: 500;
       opacity: 0.95;
+      text-align: center;
     }
 
     .buy-dex-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      justify-content: center;
     }
 
     .buy-dex-button {
@@ -119,6 +131,8 @@
       font-weight: 600;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(3px);
+      text-align: center;
+      white-space: nowrap;
     }
 
     .buy-dex-button-primary {
@@ -131,6 +145,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 18px;
       margin-bottom: 32px;
     }
 
@@ -138,9 +153,10 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
-    /* NOVO: usa o Logoquantum.png */
     .brand-logo {
       width: 44px;
       height: 44px;
@@ -148,12 +164,14 @@
       box-shadow: 0 10px 26px rgba(5, 20, 58, 0.35);
       background: #ffffff;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      min-width: 0;
     }
 
     .brand-text strong {
@@ -170,9 +188,12 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 16px 20px;
       font-size: 14px;
       color: var(--color-text-soft);
+      flex: 1 1 auto;
     }
 
     nav a {
@@ -206,6 +227,7 @@
       font-size: 13px;
       font-weight: 600;
       box-shadow: 0 8px 24px rgba(10, 61, 145, 0.4);
+      white-space: nowrap;
     }
 
     .nav-cta span {
@@ -241,6 +263,7 @@
       margin-bottom: 16px;
       font-size: 11px;
       color: var(--color-text-soft);
+      flex-wrap: wrap;
     }
 
     .hero-pill-dot {
@@ -249,6 +272,7 @@
       border-radius: 999px;
       background: radial-gradient(circle at 30% 20%, #6ee7b7, #1fa37b);
       box-shadow: 0 0 0 6px rgba(31, 163, 123, 0.15);
+      flex-shrink: 0;
     }
 
     .hero h1 {
@@ -291,11 +315,11 @@
       margin-bottom: 14px;
     }
 
-    /* NOVO: links para DEX (lugares de compra) dentro do hero (mantido igual) */
     .dex-links {
       font-size: 12px;
       color: var(--color-text-soft);
       margin-bottom: 10px;
+      line-height: 1.7;
     }
 
     .dex-links a {
@@ -321,6 +345,7 @@
       border: none;
       cursor: pointer;
       box-shadow: 0 12px 30px rgba(10, 61, 145, 0.45);
+      text-align: center;
     }
 
     .btn-primary span {
@@ -340,6 +365,7 @@
       font-weight: 500;
       font-size: 13px;
       cursor: pointer;
+      text-align: center;
     }
 
     .hero-note {
@@ -347,6 +373,7 @@
       color: var(--color-text-muted);
       max-width: 460px;
       margin-bottom: 0;
+      line-height: 1.55;
     }
 
     .hero-note strong {
@@ -361,6 +388,7 @@
       font-size: 11px;
       color: var(--color-text-muted);
       text-align: right;
+      max-width: 180px;
     }
 
     .hero-tagline span {
@@ -380,6 +408,7 @@
       display: flex;
       flex-direction: column;
       gap: 18px;
+      min-width: 0;
     }
 
     .panel-header {
@@ -387,6 +416,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .panel-header h2 {
@@ -399,6 +429,7 @@
       border-radius: var(--radius-pill);
       background: rgba(255, 255, 255, 0.12);
       font-size: 11px;
+      white-space: nowrap;
     }
 
     .panel-grid {
@@ -412,6 +443,7 @@
       background: rgba(10, 17, 38, 0.25);
       padding: 11px 12px;
       font-size: 12px;
+      min-width: 0;
     }
 
     .panel-label {
@@ -423,6 +455,7 @@
     .panel-value {
       font-weight: 600;
       font-size: 13px;
+      line-height: 1.5;
     }
 
     .panel-value-accent {
@@ -447,6 +480,7 @@
     .panel-footer {
       font-size: 11px;
       color: rgba(220, 234, 255, 0.85);
+      line-height: 1.6;
     }
 
     main {
@@ -454,6 +488,7 @@
       grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
       gap: 26px;
       margin-bottom: 40px;
+      align-items: start;
     }
 
     .card {
@@ -461,11 +496,13 @@
       background: var(--color-surface);
       padding: 20px 20px 18px;
       box-shadow: 0 12px 30px rgba(5, 20, 58, 0.12);
+      min-width: 0;
     }
 
     .card h2 {
       font-size: 18px;
       margin-bottom: 8px;
+      line-height: 1.35;
     }
 
     .card p {
@@ -481,6 +518,7 @@
       margin-bottom: 10px;
       color: var(--color-text-soft);
       font-size: 14px;
+      line-height: 1.6;
     }
 
     .card li + li {
@@ -529,6 +567,7 @@
       color: var(--color-text-main);
       font-size: 13px;
       margin-bottom: 3px;
+      line-height: 1.45;
     }
 
     .disclaimer {
@@ -549,6 +588,7 @@
       letter-spacing: 0.12em;
       color: var(--color-text-muted);
       margin-bottom: 6px;
+      line-height: 1.4;
     }
 
     footer {
@@ -561,6 +601,7 @@
       justify-content: space-between;
       border-top: 1px solid rgba(205, 215, 235, 0.7);
       padding-top: 12px;
+      line-height: 1.6;
     }
 
     .footer-links {
@@ -574,7 +615,6 @@
       text-decoration-style: dotted;
     }
 
-    /* NOVO: etiqueta fixa no canto inferior direito */
     .location-tag {
       position: fixed;
       right: 16px;
@@ -588,28 +628,37 @@
       text-transform: uppercase;
       box-shadow: 0 8px 22px rgba(5, 20, 58, 0.5);
       z-index: 999;
+      max-width: calc(100vw - 24px);
+      text-align: center;
     }
 
-    @media (max-width: 880px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      nav {
-        width: 100%;
-        justify-content: space-between;
-      }
-
+    @media (max-width: 1024px) {
       .hero {
+        grid-template-columns: 1fr;
+      }
+
+      main {
         grid-template-columns: 1fr;
       }
 
       .hero-tagline {
         position: static;
         text-align: left;
-        margin-top: 10px;
+        margin-top: 14px;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
       }
 
       .top-links {
@@ -619,16 +668,61 @@
       .buy-dex-bar {
         border-radius: 14px;
       }
+
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .two-col-list {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 600px) {
       .page {
-        padding: 20px 14px 40px;
+        padding: 20px 14px 72px;
+      }
+
+      .top-links {
+        gap: 10px 14px;
+        font-size: 12px;
+      }
+
+      .buy-dex-bar {
+        padding: 12px;
+        gap: 10px;
+      }
+
+      .buy-dex-label {
+        width: 100%;
+      }
+
+      .buy-dex-buttons {
+        width: 100%;
+      }
+
+      .buy-dex-button {
+        flex: 1 1 100%;
+        width: 100%;
+        white-space: normal;
+      }
+
+      .brand {
+        align-items: center;
+      }
+
+      .brand-text strong {
+        font-size: 16px;
       }
 
       nav {
-        flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px 14px;
+        font-size: 13px;
+      }
+
+      .nav-cta {
+        width: 100%;
+        justify-content: center;
       }
 
       .hero-copy {
@@ -639,6 +733,28 @@
         font-size: 26px;
       }
 
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .card {
+        padding: 18px 16px 16px;
+      }
+
+      .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .location-tag {
         right: 10px;
         bottom: 10px;
@@ -646,17 +762,37 @@
         padding: 5px 10px;
       }
     }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 23px;
+      }
+
+      .section-title {
+        font-size: 13px;
+        letter-spacing: 0.08em;
+      }
+
+      .card h2,
+      .panel-header h2 {
+        font-size: 16px;
+      }
+
+      .hero-bullets span,
+      .badge,
+      .panel-chip {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- NOVO: links diretos para Telegram e X -->
     <div class="top-links">
       <a href="http://t.me/+KYWbf9mC5u8yOGZk" target="_blank" rel="noopener noreferrer">Telegram</a>
       <a href="https://x.com/Henriqu85075853" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
     </div>
 
-    <!-- NOVO: botões de compra em destaque no topo -->
     <div class="buy-dex-bar">
       <span class="buy-dex-label">Buy / trade QTM on:</span>
       <div class="buy-dex-buttons">
@@ -684,19 +820,11 @@
         >
           Sushi
         </a>
-        <!-- NOVO BOTÃO: compra com cartão via MoonPay em página separada -->
-        <a
-          href="buy-qtm-moonpay.html"
-          class="buy-dex-button"
-        >
-          Card / MoonPay
-        </a>
       </div>
     </div>
 
     <header>
       <div class="brand">
-        <!-- AQUI usa o arquivo Logoquantum.png na raiz do repositório -->
         <img src="Logoquantum.png" alt="QuantumToken logo" class="brand-logo" />
         <div class="brand-text">
           <strong>QUANTUMTOKEN</strong>
@@ -724,21 +852,21 @@
       <div class="hero-copy">
         <div class="hero-pill">
           <div class="hero-pill-dot"></div>
-          <span>Polygon PoS · ERC‑20 · Fixed supply</span>
+          <span>Polygon PoS · ERC-20 · Fixed supply</span>
         </div>
         <h1>
-          A calm, bank‑grade<br />
-          <span>crypto asset</span> with a rising on‑chain floor.
+          A calm, bank-grade<br />
+          <span>crypto asset</span> with a rising on-chain floor.
         </h1>
         <p class="hero-subtitle">
-          QuantumToken (QTM) is a scarce ERC‑20 on Polygon designed to feel like
-          a digital “bond” with security military‑grade (AES‑256‑style)
-          and post‑quantum Lamport signatures not a casino chip.
+          QuantumToken (QTM) is a scarce ERC-20 on Polygon designed to feel like
+          a digital “bond” with security military-grade (AES-256-style)
+          and post-quantum Lamport signatures not a casino chip.
         </p>
 
         <div class="hero-bullets">
-          <span>Hard‑capped 1&nbsp;billion supply</span>
-          <span>Transparent on‑chain sales from the contract</span>
+          <span>Hard-capped 1&nbsp;billion supply</span>
+          <span>Transparent on-chain sales from the contract</span>
           <span>Chainlink anchored minimum USD price</span>
           <span>Security stack with ECDSA + Lamport</span>
         </div>
@@ -750,7 +878,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Buy QTM on‑chain
+            Buy QTM on-chain
             <span>●</span>
           </a>
           <a
@@ -763,7 +891,6 @@
           </a>
         </div>
 
-        <!-- MANTIDO: locais onde as pessoas podem comprar QTM em DEX -->
         <div class="dex-links">
           Also trade QTM on:
           <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">Uniswap (recommended)</a>
@@ -771,9 +898,6 @@
           <a href="https://apeswap.finance/swap" target="_blank" rel="noopener noreferrer">ApeSwap</a>
           ·
           <a href="https://www.sushi.com/" target="_blank" rel="noopener noreferrer">Sushi</a>
-          ·
-          <!-- NOVO LINK: compra com cartão via MoonPay -->
-          <a href="buy-qtm-moonpay.html">Buy with card (MoonPay)</a>
         </div>
 
         <p class="hero-note">
@@ -810,7 +934,7 @@
         <div class="panel-card">
           <div class="panel-label">Security layers</div>
           <div class="panel-chip-row">
-            <div class="panel-chip">Military‑grade AES style encryption narrative</div>
+            <div class="panel-chip">Military-grade AES style encryption narrative</div>
             <div class="panel-chip">ECDSA + Lamport post quantum signatures</div>
             <div class="panel-chip">Role based access &amp; audits</div>
             <div class="panel-chip">Circuit breaker pause controls</div>
@@ -828,32 +952,32 @@
         <div class="section-title">Why QuantumToken exists</div>
         <h2>A scarce, security obsessed asset not another meme</h2>
         <p>
-          Most tokens either chase hype and ignore security, or over‑engineer features
+          Most tokens either chase hype and ignore security, or over-engineer features
           and forget about scarcity. QuantumToken (QTM) was built to do the opposite:
-          a hard‑capped supply of 1&nbsp;billion units combined with an architecture
-          inspired by bank‑grade and post quantum security thinking.
+          a hard-capped supply of 1&nbsp;billion units combined with an architecture
+          inspired by bank-grade and post quantum security thinking.
         </p>
         <p>
           At launch, a minority of the supply is reserved to the founding wallet for
-          long‑term alignment, while the majority sits inside the contract itself to
+          long-term alignment, while the majority sits inside the contract itself to
           be released only through transparent, on chain purchases. No stealth mints,
           no hidden unlock schedules every movement can be followed on PolygonScan.
         </p>
         <div class="badge-row">
-          <span class="badge badge-green">Hard‑capped, predictable supply</span>
+          <span class="badge badge-green">Hard-capped, predictable supply</span>
           <span class="badge badge-gold">Designed for multi year conviction</span>
           <span class="badge">Built on Polygon PoS</span>
         </div>
         <p>
           The ambition is simple: to let holders feel about their QTM position the way
-          they feel about a solid long‑term banking relationship calm, transparent,
+          they feel about a solid long-term banking relationship calm, transparent,
           and protected by layered security, even while fully acknowledging crypto risk.
         </p>
       </section>
 
       <section id="security" class="card">
         <div class="section-title">Security stack</div>
-        <h2>Bank controls and post‑quantum checks</h2>
+        <h2>Bank controls and post-quantum checks</h2>
         <p>
           Security is not a slogan here; it is the core design principle. The contract
           is built on modern OpenZeppelin primitives and extends them with extra
@@ -861,7 +985,7 @@
         </p>
         <div class="two-col-list">
           <div>
-            <div class="two-col-item-title">Role‑based access control</div>
+            <div class="two-col-item-title">Role-based access control</div>
             <p>
               Admin, minting, audit, and emergency powers are separated into distinct
               roles, reducing single point of failure risk and mirroring institutional
@@ -885,9 +1009,9 @@
           <div>
             <div class="two-col-item-title">ECDSA + Lamport signatures</div>
             <p>
-              Quantum‑sensitive actions require a blend of today’s battle tested
+              Quantum-sensitive actions require a blend of today’s battle tested
               ECDSA and Lamport post quantum resilient signatures, raising
-              the bar for would‑be attackers.
+              the bar for would-be attackers.
             </p>
           </div>
         </div>
@@ -904,7 +1028,7 @@
       <div class="section-title">How QTM works in practice</div>
       <h2>From MATIC to QTM in a few deliberate, on chain steps</h2>
       <p>
-        QTM runs entirely on‑chain. There is no central custody and no opaque order
+        QTM runs entirely on-chain. There is no central custody and no opaque order
         book. The contract itself sells directly to buyers using MATIC/POL, with a
         minimum price curve anchored to Chainlink’s MATIC/USD oracle.
       </p>
@@ -929,7 +1053,7 @@
       <p>
         As demand gradually consumes the contract’s inventory, the on chain minimum
         price ratchets upward. This reflects QTM’s ambition to behave more like a
-        scarce, slowly hardening digital asset than a short‑lived speculation.
+        scarce, slowly hardening digital asset than a short-lived speculation.
       </p>
       <div class="badge-row">
         <span class="badge badge-green">Start with a small test purchase</span>
@@ -940,7 +1064,7 @@
 
     <section id="risk" class="card">
       <div class="section-title">Risk notice & positioning</div>
-      <h2>High‑risk asset, institution and discipline</h2>
+      <h2>High-risk asset, institution and discipline</h2>
       <p class="disclaimer">
         QuantumToken is a digital asset designed to function as a reserve of value, combining standard cryptographic security with advanced military-grade and post-quantum cryptographic protections. 
         Its architecture aims to provide long-term security and resilience against both current and future computational threats.
@@ -982,13 +1106,11 @@
     </footer>
   </div>
 
-  <!-- NOVO: texto no canto inferior direito -->
   <div class="location-tag">
     Canary Wharf, London
   </div>
 
   <script>
-    // Simple year update
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
